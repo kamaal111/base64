@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KamaalUI
 import KamaalExtensions
 
 private enum EditorFields {
@@ -29,9 +30,18 @@ struct Base64DecodingScreen: View {
                 ActionButton(localizedLabel: "Encode", action: onEncode)
                     .disabled(live)
                 Spacer()
-                Toggle(isOn: $live) {
+                VStack {
+                    #if os(iOS)
                     Text("Live")
+                        .bold()
+                    #endif
+                    Toggle(isOn: $live) {
+                        Text("Live")
+                    }
                 }
+                #if os(iOS)
+                .labelsHidden()
+                #endif
             }
             Base64Editor(text: $base64, localizedTitle: "Base64")
                 .focused($focusedField, equals: .base64)

@@ -63,3 +63,5 @@ Packaging.log
 DistributionSummary.plist
 EpochStamp.pkg
 ExportOptions.plist
+
+*.app
