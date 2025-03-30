@@ -4,7 +4,16 @@
     "Base64" : {
 
     },
+    "Decode" : {
+
+    },
     "Decoded" : {
+
+    },
+    "Encode" : {
+
+    },
+    "Live" : {
 
     }
   },

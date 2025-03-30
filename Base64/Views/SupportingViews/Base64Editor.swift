@@ -12,7 +12,7 @@ struct Base64Editor: View {
 
     @Binding var text: String
 
-    var title: String
+    let title: String
 
     init(text: Binding<String>, title: String) {
         self._text = text
