@@ -13,20 +13,23 @@ struct Base64Editor: View {
     @Binding var text: String
 
     let title: String
+    let textColor: Color?
 
-    init(text: Binding<String>, title: String) {
+    init(text: Binding<String>, title: String, textColor: Color? = nil) {
         self._text = text
         self.title = title
+        self.textColor = textColor
     }
 
     init(
         text: Binding<String>,
         localizedTitle: LocalizedStringResource,
         localizedTitleComment: String = "",
-        bundle: Bundle = .main
+        bundle: Bundle = .main,
+        textColor: Color? = nil
     ) {
         let title = NSLocalizedString(localizedTitle.key, bundle: bundle, comment: localizedTitleComment)
-        self.init(text: text, title: title)
+        self.init(text: text, title: title, textColor: textColor)
     }
 
     var body: some View {
@@ -35,6 +38,7 @@ struct Base64Editor: View {
                 .font(.headline)
             TextEditor(text: $text)
                 .focused($focused)
+                .foregroundStyle(textColor ?? .primary)
         }
     }
 }

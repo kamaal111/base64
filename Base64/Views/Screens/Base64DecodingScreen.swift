@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KamaalExtensions
 
 private enum EditorFields {
     case base64
@@ -15,6 +16,7 @@ private enum EditorFields {
 struct Base64DecodingScreen: View {
     @State private var base64 = ""
     @State private var decoded = ""
+    @State private var base64IsInvalid = false
     @State private var live = true
 
     @FocusState private var focusedField: EditorFields?
@@ -34,7 +36,7 @@ struct Base64DecodingScreen: View {
             Base64Editor(text: $base64, localizedTitle: "Base64")
                 .focused($focusedField, equals: .base64)
             Divider()
-            Base64Editor(text: $decoded, localizedTitle: "Decoded")
+            Base64Editor(text: $decoded, localizedTitle: "Decoded", textColor: base64IsInvalid ? .red : nil)
                 .focused($focusedField, equals: .decoded)
         }
         .padding()
@@ -42,9 +44,32 @@ struct Base64DecodingScreen: View {
         .onChange(of: decoded, handleDecodedChange)
     }
 
-    private func decode() { }
+    private var trimmedBase64: String {
+        base64.trimmingByWhitespacesAndNewLines
+    }
 
-    private func encode() { }
+    private func declareBase64AsInvalid() {
+        base64IsInvalid = true
+        decoded = NSLocalizedString("Invalid base64", comment: "")
+    }
+
+    private func decode() {
+        guard let decoded = Base64Utils.decode(from: trimmedBase64) else {
+            declareBase64AsInvalid()
+            return
+        }
+
+        if base64IsInvalid {
+            base64IsInvalid = false
+        }
+
+        self.decoded = decoded
+    }
+
+    private func encode() {
+        let encoded = Base64Utils.encode(from: decoded)
+        self.base64 = encoded
+    }
 
     private func onDecode() {
         assert(!live)
