@@ -65,3 +65,4 @@ EpochStamp.pkg
 ExportOptions.plist
 
 *.app
+*.dmg
