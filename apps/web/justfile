@@ -1,0 +1,13 @@
+dev: install-modules
+    pnpm dev
+
+bootstrap: install-pnpm install-modules
+
+[private]
+install-pnpm:
+    corepack enable
+    corepack prepare pnpm@latest --activate
+
+[private]
+install-modules:
+    pnpm install

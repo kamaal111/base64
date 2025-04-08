@@ -1,2 +1,7 @@
 create-dmg:
     zsh ./scripts/create-dmg.zsh
+
+bootstrap:
+    #/bin/bash
+
+    echo "Nothing to bootstrap for Apple"
