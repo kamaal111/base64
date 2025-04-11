@@ -1,0 +1,3 @@
+bootstrap:
+    just web/bootstrap
+    just apple/bootstrap
