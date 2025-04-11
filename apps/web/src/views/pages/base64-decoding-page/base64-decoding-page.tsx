@@ -17,14 +17,14 @@ function Base64DecodingPage() {
     null,
   );
   const [base64IsInvalid, setBase64IsInvalid] = React.useState(false);
+  const [decodedIsInvalid, setDecodedIsInvalid] = React.useState(false);
 
   function handleBase64Change(text: string) {
     if (focusedField !== TEXT_FIELDS.BASE64) return;
 
     setBase64(text);
-
     try {
-      setDecoded(btoa(text));
+      setDecoded(atob(text));
       if (base64IsInvalid) {
         setBase64IsInvalid(false);
       }
@@ -38,7 +38,16 @@ function Base64DecodingPage() {
     if (focusedField !== TEXT_FIELDS.DECODED) return;
 
     setDecoded(text);
-    setBase64IsInvalid(false);
+
+    try {
+      setBase64(btoa(text));
+      if (decodedIsInvalid) {
+        setDecodedIsInvalid(false);
+      }
+    } catch {
+      setBase64('Invalid text');
+      setDecodedIsInvalid(true);
+    }
   }
 
   return (
@@ -46,6 +55,7 @@ function Base64DecodingPage() {
       <Base64Editor
         title="Base64"
         value={base64}
+        isInvalid={decodedIsInvalid}
         onChange={handleBase64Change}
         onFocus={() => setFocusedField(TEXT_FIELDS.BASE64)}
       />
