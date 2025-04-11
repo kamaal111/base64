@@ -1,20 +1,20 @@
 import type React from 'react';
 
-import type { Alignment } from '../types';
-
 type AlignItems = React.CSSProperties['alignItems'];
+type AlignItemsToAlignments = typeof ALIGN_ITEMS_TO_ALIGNMENT;
+
+export type Alignments = keyof AlignItemsToAlignments;
+
+const ALIGN_ITEMS_TO_ALIGNMENT = {
+  center: 'center',
+  leading: 'flex-start',
+  trailing: 'flex-end',
+} as const;
 
 export function alignmentToAlignItems(
-  alignment: Alignment | undefined,
+  alignment: Alignments | undefined,
 ): AlignItems | undefined {
   if (alignment == null) return;
 
-  switch (alignment) {
-    case 'center':
-      return 'center';
-    case 'leading':
-      return 'flex-start';
-    case 'trailing':
-      return 'flex-end';
-  }
+  return ALIGN_ITEMS_TO_ALIGNMENT[alignment];
 }

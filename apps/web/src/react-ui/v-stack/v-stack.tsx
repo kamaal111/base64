@@ -1,13 +1,12 @@
 import type React from 'react';
 
-import { alignmentToAlignItems } from '../internals/alignment';
-import type { Alignment } from '../types';
+import { type Alignments, alignmentToAlignItems } from '../internals/alignment';
 
 import './v-stack.css';
 
 type VStackProps = React.PropsWithChildren<{
   frame?: { width?: React.CSSProperties['width'] };
-  alignment?: Alignment;
+  alignment?: Alignments;
 }>;
 
 function VStack({ children, frame, alignment }: VStackProps) {
