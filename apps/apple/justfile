@@ -1,4 +1,5 @@
 set export
+set dotenv-load
 
 APP_NAME := "Base64"
 SCHEME := APP_NAME
@@ -13,6 +14,7 @@ DMG_PATH := OUTPUT / APP_NAME + ".dmg"
 RESOURCES := "Resources"
 EXPORT_OPTIONS := RESOURCES / "ExportOptions.plist"
 DMG_BACKGROUND := RESOURCES / "background.png"
+NOTARY_PROFILE := "AC_NOTARY_PROFILE"
 
 archive-mac: install-xcpretty prepare-output
     #!/bin/zsh
@@ -34,6 +36,32 @@ create-mac-app: install-xcpretty prepare-output archive-mac
         -archivePath "$ARCHIVE_PATH" \
         -exportOptionsPlist "$EXPORT_OPTIONS" \
         -exportPath "$OUTPUT" | xcpretty
+
+create-mac-app-zip-and-notarize: prepare-output
+    #!/bin/zsh
+
+    export VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$APP_PATH/Contents/Info.plist")
+    export ZIP_PATH="$OUTPUT/$SCHEME-$VERSION.zip"
+
+    echo "Running codesign checks..."
+    codesign --verify --deep --strict --verbose=2 "$APP_PATH"
+
+    echo "Zipping app..."
+    /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "$ZIP_PATH"
+    echo "ZIP created: $ZIP_PATH"
+
+    echo "Submitting for notarization..."
+    xcrun notarytool submit "$ZIP_PATH" --keychain-profile "$NOTARY_PROFILE" --wait
+
+    echo "Stapling notarization ticket..."
+    xcrun stapler staple "$APP_PATH"
+
+    echo "Verifying notarization and Gatekeeper..."
+    xcrun stapler validate "$APP_PATH"
+    spctl --assess --type execute -vv "$APP_PATH"
+
+    echo "App: $APP_PATH"
+    echo "ZIP: $ZIP_PATH"
 
 create-dmg: install-create-dmg create-mac-app
     #!/bin/zsh
@@ -86,6 +114,14 @@ create-dmg: install-create-dmg create-mac-app
     fi
 
     echo "Done creating $APP_NAME DMG!"
+
+create-notary-profile:
+    #!/bin/zsh
+
+    xcrun notarytool store-credentials "$NOTARY_PROFILE" \
+        --apple-id "$APPLE_ID_EMAIL" \
+        --team-id "$APPLE_TEAM_ID" \
+        --password "$APP_SPECIFIC_PASSWORD"
 
 bootstrap: install-tools
 
