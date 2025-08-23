@@ -5,15 +5,16 @@ SCHEME := APP_NAME
 PROJECT := APP_NAME + ".xcodeproj"
 OUTPUT := "out"
 ARCHIVE_PATH := OUTPUT / APP_NAME + ".xcarchive"
+APP_PATH := OUTPUT / APP_NAME + ".app"
+DMG_ICON := APP_PATH / "Contents/Resources/AppIconMacOS.icns"
 MACOS_DESTINATION := "generic/platform=macOS"
 MACOS_SDK := "macosx"
-APP_PATH := APP_NAME + ".app"
-DMG_NAME := APP_NAME + ".dmg"
-DMG_RESOURCES := "DMGResources"
-DMG_BACKGROUND := DMG_RESOURCES / "background.png"
-DMG_ICON := APP_PATH / "Contents/Resources/AppIconMacOS.icns"
+DMG_PATH := OUTPUT / APP_NAME + ".dmg"
+RESOURCES := "Resources"
+EXPORT_OPTIONS := RESOURCES / "ExportOptions.plist"
+DMG_BACKGROUND := RESOURCES / "background.png"
 
-archive-mac: install-xcpretty prepare-archive
+archive-mac: install-xcpretty prepare-output
     #!/bin/zsh
 
     export CONFIG="Release"
@@ -26,7 +27,15 @@ archive-mac: install-xcpretty prepare-archive
         -sdk "$MACOS_SDK" \
         -destination "$MACOS_DESTINATION" | xcpretty
 
-create-dmg: install-create-dmg
+create-mac-app: install-xcpretty prepare-output archive-mac
+    #!/bin/zsh
+
+    set -o pipefail && xcodebuild -exportArchive \
+        -archivePath "$ARCHIVE_PATH" \
+        -exportOptionsPlist "$EXPORT_OPTIONS" \
+        -exportPath "$OUTPUT" | xcpretty
+
+create-dmg: install-create-dmg create-mac-app
     #!/bin/zsh
 
     if [ -f $DMG_NAME ]
@@ -65,7 +74,7 @@ create-dmg: install-create-dmg
         --app-drop-link 600 250 \
         --no-internet-enable \
         --skip-jenkins \
-        $DMG_NAME \
+        $DMG_PATH \
         $APP_PATH
 
     if [ $? -eq 0 ]
@@ -111,7 +120,7 @@ install-create-dmg:
     fi
 
 [private]
-prepare-archive:
+prepare-output:
     #!/bin/zsh
 
     mkdir -p $OUTPUT

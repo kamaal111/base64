@@ -61,7 +61,6 @@ Secrets
 *.xcarchive
 Packaging.log
 DistributionSummary.plist
-ExportOptions.plist
 
 *.app
 *.dmg

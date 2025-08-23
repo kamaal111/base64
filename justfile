@@ -1,8 +1,8 @@
 default:
     just --list --unsorted
 
-archive-mac:
-    just apps/apple/archive-mac
+create-mac-app:
+    just apps/apple/create-mac-app
 
 create-dmg:
     just apps/apple/create-dmg
