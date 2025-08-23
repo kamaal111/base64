@@ -65,3 +65,4 @@ ExportOptions.plist
 
 *.app
 *.dmg
+out

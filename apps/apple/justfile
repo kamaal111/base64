@@ -1,26 +1,33 @@
 set export
 
 APP_NAME := "Base64"
-APP_PATH := "./Base64.app"
+SCHEME := APP_NAME
+PROJECT := APP_NAME + ".xcodeproj"
+OUTPUT := "out"
+ARCHIVE_PATH := OUTPUT / APP_NAME + ".xcarchive"
+MACOS_DESTINATION := "generic/platform=macOS"
+MACOS_SDK := "macosx"
+APP_PATH := APP_NAME + ".app"
 DMG_NAME := APP_NAME + ".dmg"
-DMG_RESOURCES := "./DMGResources"
+DMG_RESOURCES := "DMGResources"
 DMG_BACKGROUND := DMG_RESOURCES / "background.png"
 DMG_ICON := APP_PATH / "Contents/Resources/AppIconMacOS.icns"
 
-create-dmg:
+archive-mac: install-xcpretty prepare-archive
     #!/bin/zsh
 
-    if ! command -v create-dmg &> /dev/null
-    then
-        echo "create-dmg is not installed. Installing via Homebrew..."
-        if ! command -v brew &> /dev/null
-        then
-            echo "Homebrew is not installed. Please install Homebrew first: https://brew.sh/"
-            exit 1
-        fi
+    export CONFIG="Release"
 
-        brew install create-dmg
-    fi
+    set -o pipefail && xcodebuild archive \
+        -project "$PROJECT" \
+        -scheme "$SCHEME" \
+        -configuration "$CONFIG" \
+        -archivePath "$ARCHIVE_PATH" \
+        -sdk "$MACOS_SDK" \
+        -destination "$MACOS_DESTINATION" | xcpretty
+
+create-dmg: install-create-dmg
+    #!/bin/zsh
 
     if [ -f $DMG_NAME ]
     then
@@ -57,6 +64,7 @@ create-dmg:
         --icon "$APP_NAME.app" 200 250 \
         --app-drop-link 600 250 \
         --no-internet-enable \
+        --skip-jenkins \
         $DMG_NAME \
         $APP_PATH
 
@@ -70,7 +78,40 @@ create-dmg:
 
     echo "Done creating $APP_NAME DMG!"
 
-bootstrap:
-    #/bin/bash
+bootstrap: install-tools
 
-    echo "Nothing to bootstrap for Apple"
+[private]
+install-tools: install-create-dmg install-xcpretty
+
+[private]
+install-xcpretty:
+    #!/bin/zsh
+
+    if ! command -v xcpretty &> /dev/null
+    then
+        echo "xcpretty is not installed. Installing via Gem..."
+
+        gem install create-dmg || exit 1
+    fi
+
+[private]
+install-create-dmg:
+    #!/bin/zsh
+
+    if ! command -v create-dmg &> /dev/null
+    then
+        echo "create-dmg is not installed. Installing via Homebrew..."
+        if ! command -v brew &> /dev/null
+        then
+            echo "Homebrew is not installed. Please install Homebrew first: https://brew.sh/"
+            exit 1
+        fi
+
+        brew install create-dmg
+    fi
+
+[private]
+prepare-archive:
+    #!/bin/zsh
+
+    mkdir -p $OUTPUT
