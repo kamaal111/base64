@@ -43,54 +43,54 @@ create-mac-app-zip-and-notarize: prepare-output
     export VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$APP_PATH/Contents/Info.plist")
     export ZIP_PATH="$OUTPUT/$SCHEME-$VERSION.zip"
 
-    echo "Running codesign checks..."
+    echo "🔏 Running codesign checks..."
     codesign --verify --deep --strict --verbose=2 "$APP_PATH"
 
-    echo "Zipping app..."
+    echo "🗜️ Zipping app..."
     /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "$ZIP_PATH"
-    echo "ZIP created: $ZIP_PATH"
+    echo "📦 ZIP created: $ZIP_PATH"
 
-    echo "Submitting for notarization..."
+    echo "📨 Submitting for notarization..."
     xcrun notarytool submit "$ZIP_PATH" --keychain-profile "$NOTARY_PROFILE" --wait
 
-    echo "Stapling notarization ticket..."
+    echo "📎 Stapling notarization ticket..."
     xcrun stapler staple "$APP_PATH"
 
-    echo "Verifying notarization and Gatekeeper..."
+    echo "🔍 Verifying notarization and Gatekeeper..."
     xcrun stapler validate "$APP_PATH"
     spctl --assess --type execute -vv "$APP_PATH"
 
-    echo "App: $APP_PATH"
-    echo "ZIP: $ZIP_PATH"
+    echo "📂 App: $APP_PATH"
+    echo "📦 ZIP: $ZIP_PATH"
 
 create-dmg: install-create-dmg create-mac-app
     #!/bin/zsh
 
     if [ -f $DMG_NAME ]
     then
-        echo "Removing existing DMG file $DMG_NAME..."
+        echo "🗑️ Removing existing DMG file $DMG_NAME..."
         rm $DMG_NAME
     fi
 
     if [ ! -d $APP_PATH ]
     then
-        echo "Error: $APP_PATH does not exist. Please build the app first."
+        echo "❌ Error: $APP_PATH does not exist. Please build the app first."
         exit 1
     fi
 
     if [ ! -f $DMG_BACKGROUND ]
     then
-        echo "Error: Background image $DMG_BACKGROUND does not exist."
+        echo "❌ Error: Background image $DMG_BACKGROUND does not exist."
         exit 1
     fi
 
     if [ ! -f $DMG_ICON ]
     then
-        echo "Error: Icon file $DMG_ICON does not exist."
+        echo "❌ Error: Icon file $DMG_ICON does not exist."
         exit 1
     fi
 
-    echo "Creating DMG for $APP_NAME..."
+    echo "💿 Creating DMG for $APP_NAME..."
     create-dmg \
         --volname $APP_NAME \
         --volicon $DMG_ICON \
@@ -107,13 +107,13 @@ create-dmg: install-create-dmg create-mac-app
 
     if [ $? -eq 0 ]
     then
-        echo "DMG created successfully: $APP_NAME.dmg"
+        echo "✅ DMG created successfully: $APP_NAME.dmg"
     else
-        echo "Error creating DMG"
+        echo "❌ Error creating DMG"
         exit 1
     fi
 
-    echo "Done creating $APP_NAME DMG!"
+    echo "🎉 Done creating $APP_NAME DMG!"
 
 create-notary-profile:
     #!/bin/zsh
@@ -134,8 +134,7 @@ install-xcpretty:
 
     if ! command -v xcpretty &> /dev/null
     then
-        echo "xcpretty is not installed. Installing via Gem..."
-
+        echo "📦 xcpretty is not installed. Installing via Gem..."
         gem install create-dmg || exit 1
     fi
 
@@ -145,10 +144,10 @@ install-create-dmg:
 
     if ! command -v create-dmg &> /dev/null
     then
-        echo "create-dmg is not installed. Installing via Homebrew..."
+        echo "📦 create-dmg is not installed. Installing via Homebrew..."
         if ! command -v brew &> /dev/null
         then
-            echo "Homebrew is not installed. Please install Homebrew first: https://brew.sh/"
+            echo "❌ Homebrew is not installed. Please install Homebrew first: https://brew.sh/"
             exit 1
         fi
 
