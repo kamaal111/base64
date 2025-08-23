@@ -65,3 +65,4 @@ DistributionSummary.plist
 *.app
 *.dmg
 out
+payload
