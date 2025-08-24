@@ -40,6 +40,8 @@ create-mac-app: install-xcpretty archive-mac
         -archivePath "$ARCHIVE_PATH" \
         -exportOptionsPlist "$EXPORT_OPTIONS" \
         -exportPath "$EXPORT_PATH" | xcpretty
+    
+    codesign -d --entitlements :- "$APP_PATH" || exit 1
 
 create-pkg: install-xcpretty create-mac-app
     #!/bin/zsh

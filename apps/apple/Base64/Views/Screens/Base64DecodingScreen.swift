@@ -55,7 +55,7 @@ struct Base64DecodingScreen: View {
         .onAppear(perform: {
             focusedField = .decoded
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                decoded = "Version 1.0.2"
+                decoded = "Version 1.0.3"
             }
         })
     }
