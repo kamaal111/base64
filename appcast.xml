@@ -17,7 +17,11 @@
       ]]></description>
       <pubDate>Sun, 24 Aug 2025 12:00:00 +0000</pubDate>
       <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
-      <enclosure url="https://github.com/kamaal111/base64/releases/download/1.0.1/Base64-1.0.1.pkg" length="4059462" type="application/octet-stream" />
+      <enclosure
+        url="https://github.com/kamaal111/base64/releases/download/1.0.1/Base64-1.0.1.pkg"
+        sparkle:edSignature="1ToooJa3dRvwyqo1jDIrJclNSxAEyzgPkMaZWnLXcebRRa3b6AE8OQ/SBiOD2zW90iwkFtY8EJuM8z2W0zYpAw=="
+        length="4059462"
+        type="application/octet-stream" />
     </item>
   </channel>
 </rss>
