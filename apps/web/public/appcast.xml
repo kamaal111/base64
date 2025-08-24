@@ -6,21 +6,21 @@
     <description>Updates for Base64 App</description>
     <language>en</language>
     <item>
-      <title>Version 1.0.1</title>
-      <sparkle:version>1.0.1</sparkle:version>
-      <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
+      <title>Version 1.0.2</title>
+      <sparkle:version>3</sparkle:version>
+      <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
       <description><![CDATA[
-        <h2>What's New in Version 1.0.1</h2>
+        <h2>What's New in Version 1.0.2</h2>
         <ul>
-          <li>Set up self updating infrastructure</li>
+          <li>Trying stuff out</li>
         </ul>
       ]]></description>
-      <pubDate>Sun, 24 Aug 2025 12:00:00 +0000</pubDate>
+      <pubDate>Sun, 24 Aug 2025 15:00:00 +0000</pubDate>
       <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
       <enclosure
-        url="https://github.com/kamaal111/base64/releases/download/1.0.1/Base64-1.0.1.pkg"
-        sparkle:edSignature="k2+Odlz4kUuInrEU0k7qrdtLtWGXDQrB4w2pVRmhthARIHusiEseschECEqc4TD/B5STgwncEBm8Afen72qaDQ=="
-        length="4058221"
+        url="https://github.com/kamaal111/base64/releases/download/1.0.2/Base64-1.0.2.pkg"
+        sparkle:edSignature="FPSBXf2OAT6DvRDo9ToY8Y0n+NFJFmuYelisSKh4s/+E0S4e3xU4mbR/heKLuehmpbmpHYQ+AKojx2LEW1r2CA=="
+        length="4060031"
         type="application/octet-stream" />
     </item>
   </channel>
