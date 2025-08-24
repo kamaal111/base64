@@ -1,7 +1,20 @@
-dev: install-modules
-    pnpm dev
+PN := "PNPM"
+PNR := PN + " run"
+PNX := PN + " exec"
+TSX := PNX + " tsx"
 
-bootstrap: install-pnpm install-modules
+dev: prepare
+    {{ PNR }} dev
+
+build: prepare
+    {{ PNR }} build
+
+publish: build
+    {{ TSX }} scripts/gh-publish.ts
+
+bootstrap: install-pnpm prepare
+
+prepare: install-modules
 
 [private]
 install-pnpm:
@@ -10,4 +23,4 @@ install-pnpm:
 
 [private]
 install-modules:
-    pnpm install
+    {{ PN }} install

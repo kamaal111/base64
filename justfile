@@ -15,5 +15,11 @@ create-pkg:
 dev-web:
     just apps/web/dev
 
+build-web:
+    just apps/web/build
+
+publish-web:
+    just apps/web/publish
+
 bootstrap:
     just apps/bootstrap

@@ -20,19 +20,23 @@
     "@eslint/js": "^9",
     "@rsbuild/core": "^1",
     "@rsbuild/plugin-react": "^1",
+    "@types/gh-pages": "^6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-plugin-react": "^7",
     "eslint-plugin-react-hooks": "^5",
+    "gh-pages": "^6",
     "globals": "^16",
     "prettier": "^3",
+    "tsx": "^4",
     "typescript": "^5",
     "typescript-eslint": "^8"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "core-js"
+      "core-js",
+      "esbuild"
     ]
   }
 }
