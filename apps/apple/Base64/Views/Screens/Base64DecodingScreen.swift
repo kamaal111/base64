@@ -52,6 +52,12 @@ struct Base64DecodingScreen: View {
         .padding()
         .onChange(of: base64, handleBase64Change)
         .onChange(of: decoded, handleDecodedChange)
+        .onAppear(perform: {
+            focusedField = .decoded
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                decoded = "Version 1.0.2"
+            }
+        })
     }
 
     private var trimmedBase64: String {
