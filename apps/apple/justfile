@@ -110,6 +110,78 @@ generate-sparkle-keys: build-mac
     SPARKLE_BIN_PATH=$(just get-sparkle-binary-path | tail -n 1)
     $SPARKLE_BIN_PATH/generate_keys
 
+# Print sizes of all .pkg files in the out directory
+pkg-sizes:
+    #!/bin/zsh
+    
+    if [[ ! -d "$OUTPUT" ]]
+    then
+        echo "❌ Output directory '$OUTPUT' does not exist"
+        exit 1
+    fi
+
+    pkg_count=$(find "$OUTPUT" -maxdepth 1 -name "*.pkg" -type f | wc -l)
+    
+    if [[ $pkg_count -eq 0 ]]
+    then
+        echo "❌ No .pkg files found in '$OUTPUT' directory"
+        exit 1
+    fi
+    
+    echo "📦 PKG file sizes in '$OUTPUT':"
+    echo "================================"
+    
+    find "$OUTPUT" -maxdepth 1 -name "*.pkg" -type f | while read -r pkg_file
+    do
+        filename=$(basename "$pkg_file")
+        size=$(ls -lh "$pkg_file" | awk '{print $5}')
+        size_bytes=$(stat -f%z "$pkg_file")
+        printf "%-30s %8s (%d bytes)\n" "$filename" "$size" "$size_bytes"
+    done
+
+# Sign .pkg files with Sparkle for app updates
+sign-pkg:
+    #!/bin/zsh
+    
+    if [[ ! -d "$OUTPUT" ]]
+    then
+        echo "❌ Output directory '$OUTPUT' does not exist"
+        exit 1
+    fi
+
+    pkg_files=($(find "$OUTPUT" -maxdepth 1 -name "*.pkg" -type f))
+    
+    if [[ ${#pkg_files[@]} -eq 0 ]]
+    then
+        echo "❌ No .pkg files found in '$OUTPUT' directory"
+        exit 1
+    fi
+
+    SPARKLE_BIN_PATH=$(just get-sparkle-binary-path | tail -n 1)
+    SIGN_UPDATE_PATH="$SPARKLE_BIN_PATH/sign_update"
+    
+    if [[ ! -f "$SIGN_UPDATE_PATH" ]]
+    then
+        echo "❌ sign_update binary not found at: $SIGN_UPDATE_PATH"
+        exit 1
+    fi
+    
+    echo "🔐 Signing .pkg files with Sparkle..."
+    
+    for pkg_file in "${pkg_files[@]}"; do
+        filename=$(basename "$pkg_file")
+        echo "📝 Signing: $filename"
+        
+        if "$SIGN_UPDATE_PATH" "$pkg_file"; then
+            echo "✅ Successfully signed: $filename"
+        else
+            echo "❌ Failed to sign: $filename"
+            exit 1
+        fi
+    done
+    
+    echo "✅ All .pkg files signed successfully"
+
 bootstrap: install-tools
 
 [private]

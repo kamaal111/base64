@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Base64 App Updates</title>
+    <link>https://kamaal.io/base64/appcast.xml</link>
+    <description>Updates for Base64 App</description>
+    <language>en</language>
+    <item>
+      <title>Version 1.0.1</title>
+      <sparkle:version>1.0.1</sparkle:version>
+      <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
+      <description><![CDATA[
+        <h2>What's New in Version 1.0.1</h2>
+        <ul>
+          <li>Set up self updating infrastructure</li>
+        </ul>
+      ]]></description>
+      <pubDate>Sun, 24 Aug 2025 12:00:00 +0000</pubDate>
+      <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
+      <enclosure
+        url="https://github.com/kamaal111/base64/releases/download/1.0.1/Base64-1.0.1.pkg"
+        sparkle:edSignature="1ToooJa3dRvwyqo1jDIrJclNSxAEyzgPkMaZWnLXcebRRa3b6AE8OQ/SBiOD2zW90iwkFtY8EJuM8z2W0zYpAw=="
+        length="4059462"
+        type="application/octet-stream" />
+    </item>
+  </channel>
+</rss>
