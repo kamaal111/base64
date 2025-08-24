@@ -19,8 +19,8 @@
       <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
       <enclosure
         url="https://github.com/kamaal111/base64/releases/download/1.0.1/Base64-1.0.1.pkg"
-        sparkle:edSignature="1ToooJa3dRvwyqo1jDIrJclNSxAEyzgPkMaZWnLXcebRRa3b6AE8OQ/SBiOD2zW90iwkFtY8EJuM8z2W0zYpAw=="
-        length="4059462"
+        sparkle:edSignature="k2+Odlz4kUuInrEU0k7qrdtLtWGXDQrB4w2pVRmhthARIHusiEseschECEqc4TD/B5STgwncEBm8Afen72qaDQ=="
+        length="4058221"
         type="application/octet-stream" />
     </item>
   </channel>

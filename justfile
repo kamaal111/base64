@@ -12,9 +12,6 @@ generate-sparkle-keys:
 create-pkg:
     just apps/apple/create-pkg
 
-pkg-sizes:
-    just apps/apple/pkg-sizes
-
 sign-pkg:
     just apps/apple/sign-pkg
 
