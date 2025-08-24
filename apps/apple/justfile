@@ -20,11 +20,10 @@ NOTARY_PROFILE := "AC_NOTARY_PROFILE"
 PKG_INSTALL_LOCATION := "/Applications"
 PAYLOAD := "payload"
 PKG_PAYLOAD := PAYLOAD / "Applications"
+CONFIG := "Release"
 
 archive-mac: install-xcpretty clean-artifacts prepare-output
     #!/bin/zsh
-
-    export CONFIG="Release"
 
     set -o pipefail && xcodebuild archive \
         -project "$PROJECT" \
@@ -105,6 +104,12 @@ create-notary-profile:
         --team-id "$APPLE_TEAM_ID" \
         --password "$APP_SPECIFIC_PASSWORD"
 
+generate-sparkle-keys: build-mac
+    #!/bin/zsh
+
+    SPARKLE_BIN_PATH=$(just get-sparkle-binary-path | tail -n 1)
+    $SPARKLE_BIN_PATH/generate_keys
+
 bootstrap: install-tools
 
 [private]
@@ -131,3 +136,39 @@ clean-artifacts:
     #!/bin/zsh
 
     rm -rf $PAYLOAD $OUTPUT || exit 1
+
+[private]
+build-mac:
+    #!/bin/zsh
+
+    set -o pipefail && xcodebuild build \
+        -project "$PROJECT" \
+        -scheme "$SCHEME" \
+        -configuration "$CONFIG" \
+        -sdk "$MACOS_SDK" \
+        -destination "$MACOS_DESTINATION" | xcpretty
+
+[private]
+get-sparkle-binary-path:
+    #!/bin/zsh
+
+    DERIVED_ROOT="${DERIVED_ROOT:-$HOME/Library/Developer/Xcode/DerivedData}"
+
+    BIN_PATH=""
+    if [[ -n "$SPARKLE_BIN_PATH" && -d "$SPARKLE_BIN_PATH" ]]
+    then
+        BIN_PATH="$SPARKLE_BIN_PATH"
+    else
+        BIN_PATH=$(find "$DERIVED_ROOT" -maxdepth 8 -type d \
+            \( -path "*/SourcePackages/artifacts/*/bin" -o -path "*/SourcePackages/artifacts/*/*/bin" \) \
+            -print -quit 2>/dev/null)
+    fi
+
+    if [[ -z "$BIN_PATH" || ! -d "$BIN_PATH" ]]
+    then
+        echo "❌ Sparkle tools directory not found under artifacts at: $DERIVED_ROOT" >&2
+        echo "💡 Set SPARKLE_BIN_PATH to the artifacts bin or open the project to fetch packages." >&2
+        exit 1
+    fi
+
+    echo "$BIN_PATH"
