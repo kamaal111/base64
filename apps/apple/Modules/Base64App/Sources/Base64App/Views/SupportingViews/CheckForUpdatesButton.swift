@@ -1,8 +1,8 @@
 //
 //  CheckForUpdatesButton.swift
-//  Base64
+//  Base64App
 //
-//  Created by Kamaal M Farah on 8/24/25.
+//  Created by Kamaal M Farah on 8/26/25.
 //
 
 import SwiftUI

@@ -7,26 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C192A7D2E5B63F7000C5856 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 2C192A7C2E5B63F7000C5856 /* Sparkle */; };
-		2C2B2EC32D992E26001F243E /* KamaalUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 2C2B2EC22D992E26001F243E /* KamaalUtils */; };
-		2C2B2EFF2D994A04001F243E /* KamaalExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2C2B2EFE2D994A04001F243E /* KamaalExtensions */; };
-		2C878D262D995057001051FF /* KamaalUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2C878D252D995057001051FF /* KamaalUI */; };
+		2CE27E032E5E2F8100E027CD /* Base64App in Frameworks */ = {isa = PBXBuildFile; productRef = 2CE27E022E5E2F8100E027CD /* Base64App */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		2C2B2ED22D99373B001F243E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2C1ED6252D98430800F2A5D4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2C1ED62C2D98430800F2A5D4;
-			remoteInfo = Base64;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2C192A7E2E5B64CD000C5856 /* justfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = justfile; sourceTree = "<group>"; };
 		2C1ED62D2D98430800F2A5D4 /* Base64.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Base64.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C2B2ECE2D99373B001F243E /* Base64Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Base64Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C7694602E5E4862001E6E33 /* Base64TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Base64TestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -53,9 +40,9 @@
 			path = Base64;
 			sourceTree = "<group>";
 		};
-		2C2B2ECF2D99373B001F243E /* Base64Tests */ = {
+		2CDC7DB12E5E2CE20044537B /* Modules */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Base64Tests;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -65,17 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C878D262D995057001051FF /* KamaalUI in Frameworks */,
-				2C192A7D2E5B63F7000C5856 /* Sparkle in Frameworks */,
-				2C2B2EC32D992E26001F243E /* KamaalUtils in Frameworks */,
-				2C2B2EFF2D994A04001F243E /* KamaalExtensions in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C2B2ECB2D99373B001F243E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				2CE27E032E5E2F8100E027CD /* Base64App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,10 +64,11 @@
 			children = (
 				2C192A7E2E5B64CD000C5856 /* justfile */,
 				2C1ED62F2D98430800F2A5D4 /* Base64 */,
-				2C2B2ECF2D99373B001F243E /* Base64Tests */,
 				2C2B2EFD2D994A04001F243E /* Frameworks */,
+				2CDC7DB12E5E2CE20044537B /* Modules */,
 				2C1ED62E2D98430800F2A5D4 /* Products */,
 				2C192A882E5B64FE000C5856 /* Resources */,
+				2C76945E2E5E484D001E6E33 /* Testing */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,7 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				2C1ED62D2D98430800F2A5D4 /* Base64.app */,
-				2C2B2ECE2D99373B001F243E /* Base64Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +85,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C76945E2E5E484D001E6E33 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				2C7694602E5E4862001E6E33 /* Base64TestPlan.xctestplan */,
+			);
+			path = Testing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,37 +115,11 @@
 			);
 			name = Base64;
 			packageProductDependencies = (
-				2C2B2EC22D992E26001F243E /* KamaalUtils */,
-				2C2B2EFE2D994A04001F243E /* KamaalExtensions */,
-				2C878D252D995057001051FF /* KamaalUI */,
-				2C192A7C2E5B63F7000C5856 /* Sparkle */,
+				2CE27E022E5E2F8100E027CD /* Base64App */,
 			);
 			productName = Base64;
 			productReference = 2C1ED62D2D98430800F2A5D4 /* Base64.app */;
 			productType = "com.apple.product-type.application";
-		};
-		2C2B2ECD2D99373B001F243E /* Base64Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2C2B2ED42D99373B001F243E /* Build configuration list for PBXNativeTarget "Base64Tests" */;
-			buildPhases = (
-				2C2B2ECA2D99373B001F243E /* Sources */,
-				2C2B2ECB2D99373B001F243E /* Frameworks */,
-				2C2B2ECC2D99373B001F243E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2C2B2ED32D99373B001F243E /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				2C2B2ECF2D99373B001F243E /* Base64Tests */,
-			);
-			name = Base64Tests;
-			packageProductDependencies = (
-			);
-			productName = Base64Tests;
-			productReference = 2C2B2ECE2D99373B001F243E /* Base64Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -175,10 +134,6 @@
 					2C1ED62C2D98430800F2A5D4 = {
 						CreatedOnToolsVersion = 16.2;
 					};
-					2C2B2ECD2D99373B001F243E = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 2C1ED62C2D98430800F2A5D4;
-					};
 				};
 			};
 			buildConfigurationList = 2C1ED6282D98430800F2A5D4 /* Build configuration list for PBXProject "Base64" */;
@@ -191,8 +146,6 @@
 			mainGroup = 2C1ED6242D98430800F2A5D4;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2C2B2EC12D992E26001F243E /* XCRemoteSwiftPackageReference "KamaalSwift" */,
-				2C192A7B2E5B63F7000C5856 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2C1ED62E2D98430800F2A5D4 /* Products */;
@@ -200,20 +153,12 @@
 			projectRoot = "";
 			targets = (
 				2C1ED62C2D98430800F2A5D4 /* Base64 */,
-				2C2B2ECD2D99373B001F243E /* Base64Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2C1ED62B2D98430800F2A5D4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C2B2ECC2D99373B001F243E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -230,22 +175,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2C2B2ECA2D99373B001F243E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2C2B2ED32D99373B001F243E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2C1ED62C2D98430800F2A5D4 /* Base64 */;
-			targetProxy = 2C2B2ED22D99373B001F243E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2C1ED63A2D98430900F2A5D4 /* Debug */ = {
@@ -376,7 +306,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Base64/Base64.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Base64/Preview Content\"";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -398,7 +328,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.kamaal.Base64;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -419,7 +349,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Base64/Base64.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Base64/Preview Content\"";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -441,7 +371,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.kamaal.Base64;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -450,52 +380,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				XROS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Release;
-		};
-		2C2B2ED52D99373B001F243E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MACOSX_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.kamaal.Base64Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Base64.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Base64";
-				XROS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Debug;
-		};
-		2C2B2ED62D99373B001F243E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MACOSX_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.kamaal.Base64Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Base64.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Base64";
 				XROS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
@@ -521,56 +405,12 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C2B2ED42D99373B001F243E /* Build configuration list for PBXNativeTarget "Base64Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2C2B2ED52D99373B001F243E /* Debug */,
-				2C2B2ED62D99373B001F243E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		2C192A7B2E5B63F7000C5856 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/Sparkle";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.1;
-			};
-		};
-		2C2B2EC12D992E26001F243E /* XCRemoteSwiftPackageReference "KamaalSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Kamaalio/KamaalSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		2C192A7C2E5B63F7000C5856 /* Sparkle */ = {
+		2CE27E022E5E2F8100E027CD /* Base64App */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2C192A7B2E5B63F7000C5856 /* XCRemoteSwiftPackageReference "Sparkle" */;
-			productName = Sparkle;
-		};
-		2C2B2EC22D992E26001F243E /* KamaalUtils */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2C2B2EC12D992E26001F243E /* XCRemoteSwiftPackageReference "KamaalSwift" */;
-			productName = KamaalUtils;
-		};
-		2C2B2EFE2D994A04001F243E /* KamaalExtensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2C2B2EC12D992E26001F243E /* XCRemoteSwiftPackageReference "KamaalSwift" */;
-			productName = KamaalExtensions;
-		};
-		2C878D252D995057001051FF /* KamaalUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2C2B2EC12D992E26001F243E /* XCRemoteSwiftPackageReference "KamaalSwift" */;
-			productName = KamaalUI;
+			productName = Base64App;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

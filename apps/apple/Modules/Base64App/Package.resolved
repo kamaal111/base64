@@ -1,0 +1,33 @@
+{
+  "originHash" : "d81421c17872340edeaf72585e318ac0a22cb7749669ce6497dac8dd4cbdc66d",
+  "pins" : [
+    {
+      "identity" : "confettiswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/simibac/ConfettiSwiftUI.git",
+      "state" : {
+        "revision" : "79666d42b882bf7921b1941fa7c636d681d77980",
+        "version" : "2.0.3"
+      }
+    },
+    {
+      "identity" : "kamaalswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Kamaalio/KamaalSwift",
+      "state" : {
+        "revision" : "9a0ef9b7ca34e9e3c02ba310e8a59c4bb46663d2",
+        "version" : "3.2.0"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "df074165274afaa39539c05d57b0832620775b11",
+        "version" : "2.7.1"
+      }
+    }
+  ],
+  "version" : 3
+}

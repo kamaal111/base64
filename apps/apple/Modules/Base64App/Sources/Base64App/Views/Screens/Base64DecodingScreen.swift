@@ -1,8 +1,8 @@
 //
 //  Base64DecodingScreen.swift
-//  Base64
+//  Base64App
 //
-//  Created by Kamaal M Farah on 3/30/25.
+//  Created by Kamaal M Farah on 8/26/25.
 //
 
 import SwiftUI
@@ -25,9 +25,9 @@ struct Base64DecodingScreen: View {
     var body: some View {
         VStack {
             HStack {
-                ActionButton(localizedLabel: "Decode", action: onDecode)
-                    .disabled(live)
                 ActionButton(localizedLabel: "Encode", action: onEncode)
+                    .disabled(live)
+                ActionButton(localizedLabel: "Decode", action: onDecode)
                     .disabled(live)
                 Spacer()
                 VStack {
@@ -43,21 +43,16 @@ struct Base64DecodingScreen: View {
                 .labelsHidden()
                 #endif
             }
-            Base64Editor(text: $base64, localizedTitle: "Base64")
-                .focused($focusedField, equals: .base64)
-            Divider()
             Base64Editor(text: $decoded, localizedTitle: "Decoded", textColor: base64IsInvalid ? .red : nil)
                 .focused($focusedField, equals: .decoded)
+            Divider()
+            Base64Editor(text: $base64, localizedTitle: "Base64")
+                .focused($focusedField, equals: .base64)
         }
         .padding()
         .onChange(of: base64, handleBase64Change)
         .onChange(of: decoded, handleDecodedChange)
-        .onAppear(perform: {
-            focusedField = .decoded
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                decoded = "Version 1.0.4"
-            }
-        })
+        .onAppear(perform: handleOnAppear)
     }
 
     private var trimmedBase64: String {
@@ -95,6 +90,10 @@ struct Base64DecodingScreen: View {
     private func onEncode() {
         assert(!live)
         encode()
+    }
+
+    private func handleOnAppear() {
+        focusedField = .decoded
     }
 
     private func handleBase64Change(_ oldValue: String, newValue: String) {

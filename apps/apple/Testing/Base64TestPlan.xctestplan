@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "DD3571E0-F15F-4886-8587-AE118CD175F8",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Base64App",
+        "identifier" : "Base64AppTests",
+        "name" : "Base64AppTests"
+      }
+    }
+  ],
+  "version" : 1
+}

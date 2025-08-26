@@ -1,12 +1,12 @@
 //
 //  Base64UtilsTests.swift
-//  Base64Tests
+//  Base64App
 //
-//  Created by Kamaal M Farah on 3/30/25.
+//  Created by Kamaal M Farah on 8/26/25.
 //
 
 import Testing
-@testable import Base64
+@testable import Base64App
 
 struct Base64UtilsTests {
     @Test func encode() async throws {

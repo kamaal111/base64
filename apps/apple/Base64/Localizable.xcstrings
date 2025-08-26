@@ -1,27 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Base64" : {
 
-    },
-    "Check for Updates…" : {
-
-    },
-    "Decode" : {
-
-    },
-    "Decoded" : {
-
-    },
-    "Encode" : {
-
-    },
-    "Invalid base64" : {
-
-    },
-    "Live" : {
-
-    }
   },
   "version" : "1.0"
 }
